@@ -16,7 +16,7 @@ const (
 
 var (
 	// BufferSize defined the buffer size, by default 1M buffer will be allocate
-	BufferSize = 0x100000
+	BufferSize = 524288
 	// QueueSize defined the queue size for asynchronize write
 	QueueSize = 1024
 	// Precision defined the precision about the reopen operation condition
@@ -184,7 +184,7 @@ func WithMaxRemain(max int) Option {
 	}
 }
 
-//WithoutRolling set no rolling policy
+// WithoutRolling set no rolling policy
 func WithoutRollingPolicy() Option {
 	return func(p *Config) {
 		p.RollingPolicy = WithoutRolling

@@ -304,7 +304,11 @@ func (w *AsynchronousWriter) writer() {
 			if _, err = w.file.Write(b); err != nil {
 				w.errChan <- err
 			}
-			_asyncBufferPool.Put(b)
+			if len(b) <= BufferSize {
+				_asyncBufferPool.Put(b)
+			} else {
+				// 如果buffer太大，就不放入了
+			}
 		case <-w.ctx:
 			return
 		}
